@@ -2,6 +2,8 @@
 Visual tool for any Drummer struggling with inital song tempo.  
 The whole screen blinks at the tempo you defined for each song.
 
+Give a try to the live app here: https://the8tre.github.io/drummer-cue/
+
 ![splash](splash.gif)
 
 - Create and maintain your gigs set lists
