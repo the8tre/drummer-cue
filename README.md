@@ -1,9 +1,22 @@
 # Drummer's Cue
+Visual tool for any Drummer struggling with inital song tempo.  
+The whole screen blinks at the tempo you defined for each song.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+![splash](splash.gif)
+
+- Create and maintain your gigs set lists
+- Add as many song as you want per set list
+- Specify the tempo fo each song
+- Optionally provide a duration after which the player will automatically to the next song
+- Click/touch the right/left of Player screen to the jump to the next/previous song of the set list
+- Click/touch the center of the Player to get back to the set list sreen
+- Set lists are persisted into you browser local storage
+
+## Next steps
+- Setlists export/import for long term storage and backup 
 
 ## Development server
-
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
 To start a local development server, run:
 
 ```bash
