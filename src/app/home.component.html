@@ -20,7 +20,11 @@
   </svg>
 </a>
 <div class="config">
-  <h2>🥁 Drummer's Cue 👀</h2>
+  <div class="header">
+    <img src="assets/icons/logo-white.svg" width="60px" />
+    <!-- <span>Drummer's Cue</span> -->
+    <span>Drummer's Cue</span>
+  </div>
   <div class="set-list">
     <div class="set-row" *ngFor="let set of sets; let i = index">
       <a (click)="openSet(set.name)" class="name"
