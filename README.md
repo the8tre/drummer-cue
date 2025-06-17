@@ -1,3 +1,5 @@
+<img src="./src/assets/icons/logo-white.svg" width="60px"/>
+
 # Drummer's Cue
 Visual tool for any Drummer struggling with inital song tempo.  
 The whole screen blinks at the tempo you defined for each song.
