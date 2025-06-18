@@ -1,36 +1,37 @@
-import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Setlist } from './home.component';
+import { CommonModule } from "@angular/common";
+import { Component, inject } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Setlist } from "./home.component";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-config',
+  selector: "app-config",
   standalone: true,
-  templateUrl: './set.component.html',
-  styleUrls: ['./set.component.css'],
-  imports: [CommonModule, FormsModule],
+  templateUrl: "./set.component.html",
+  styleUrls: ["./set.component.css"],
+  imports: [CommonModule, FormsModule, TranslateModule],
 })
 export class SetComponent {
   private route = inject(ActivatedRoute);
-  setName: string = '';
+  setName: string = "";
   set: Setlist = {
-    name: 'Default Set',
+    name: "Default Set",
     songs: [
       {
-        name: 'My Immortal',
+        name: "My Immortal",
         bpm: 158,
       },
       {
-        name: 'Black Velvet',
+        name: "Black Velvet",
         bpm: 91,
       },
       {
-        name: 'Locked Out Of Heaven',
+        name: "Locked Out Of Heaven",
         bpm: 144,
       },
       {
-        name: 'Back To Black',
+        name: "Back To Black",
         bpm: 123,
       },
       {
@@ -49,7 +50,7 @@ export class SetComponent {
   };
 
   constructor(private router: Router) {
-    const stored = localStorage.getItem('songs');
+    const stored = localStorage.getItem("songs");
     if (stored) {
       this.set.songs = JSON.parse(stored);
     }
@@ -57,8 +58,8 @@ export class SetComponent {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.setName = decodeURIComponent(params['name']);
-      const rawSets = localStorage.getItem('drummer-cue-sets');
+      this.setName = decodeURIComponent(params["name"]);
+      const rawSets = localStorage.getItem("drummer-cue-sets");
       if (rawSets) {
         const sets = JSON.parse(rawSets);
         this.set = sets.find((set: Setlist) => set.name === this.setName);
@@ -67,7 +68,7 @@ export class SetComponent {
   }
 
   addSong() {
-    this.set.songs.push({ name: '', bpm: 120, duration: undefined });
+    this.set.songs.push({ name: "", bpm: 120, duration: undefined });
     this.save();
   }
 
@@ -77,7 +78,7 @@ export class SetComponent {
   }
 
   save() {
-    const stored = localStorage.getItem('drummer-cue-sets');
+    const stored = localStorage.getItem("drummer-cue-sets");
     if (stored) {
       const sets = JSON.parse(stored);
       const existingSet = sets.find((s: Setlist) => s.name === this.set.name);
@@ -86,13 +87,13 @@ export class SetComponent {
       } else {
         sets.push(this.set);
       }
-      localStorage.setItem('drummer-cue-sets', JSON.stringify(sets));
+      localStorage.setItem("drummer-cue-sets", JSON.stringify(sets));
     }
   }
 
   startPlayer() {
     this.save();
-    this.router.navigate(['/player/' + encodeURIComponent(this.set.name)]);
+    this.router.navigate(["/player/" + encodeURIComponent(this.set.name)]);
   }
 
   moveUp(index: number) {
@@ -116,6 +117,6 @@ export class SetComponent {
   }
 
   goHome() {
-    this.router.navigate(['/home']);
+    this.router.navigate(["/home"]);
   }
 }

@@ -1,0 +1,13 @@
+{
+  "NEW_SET": "Nouveau Set",
+  "RENAME_SET": "Renommer le Set",
+  "DELETE_SET": "Supprimer le Set",
+  "ENTER_SET_NAME": "Entrez le nom du Set:",
+  "CONFIRM_DELETE_SET": "Voulez-vous vraiment supprimer '{{name}}' ?",
+  "ADD_SONG": "Ajouter un morceau",
+  "START_PLAYER": "Démarrer",
+  "BPM": "bpm",
+  "BPM_CAPITAL": "BPM",
+  "SONG_NAME": "Nom du morceau",
+  "DURATION": "Durée"
+}

@@ -4,22 +4,23 @@ import {
   Renderer2,
   ElementRef,
   inject,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Setlist, Song } from './home.component';
-import { setPostSignalSetFn } from '@angular/core/primitives/signals';
+} from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Setlist, Song } from "./home.component";
+import { TranslateModule } from "@ngx-translate/core";
+
 @Component({
-  selector: 'app-player',
+  selector: "app-player",
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './player.component.html',
-  styleUrls: ['./player.component.css'],
+  imports: [CommonModule, TranslateModule],
+  templateUrl: "./player.component.html",
+  styleUrls: ["./player.component.css"],
 })
 export class PlayerComponent {
   private route = inject(ActivatedRoute);
   set: Setlist = {
-    name: '',
+    name: "",
     songs: [],
   };
   // Current song index in the set
@@ -28,7 +29,7 @@ export class PlayerComponent {
   flashInterval: any;
   autoNextTimeout: any;
   flashTimeout: any;
-  setName: string = '';
+  setName: string = "";
 
   constructor(
     private router: Router,
@@ -38,8 +39,8 @@ export class PlayerComponent {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.setName = decodeURIComponent(params['name']);
-      const rawSets = localStorage.getItem('drummer-cue-sets');
+      this.setName = decodeURIComponent(params["name"]);
+      const rawSets = localStorage.getItem("drummer-cue-sets");
       if (rawSets) {
         const sets = JSON.parse(rawSets);
         this.set = sets.find((set: Setlist) => set.name === this.setName);
@@ -91,20 +92,20 @@ export class PlayerComponent {
   }
 
   updateTransitionStyles(durationMs: number) {
-    const root = this.el.nativeElement.querySelector('.fullscreen');
+    const root = this.el.nativeElement.querySelector(".fullscreen");
     const flashStyle = `background-color var(--flash-fade-in, 0.05s) ease-out`;
     const fadeStyle = `background-color ${durationMs}ms ease-in`;
 
     if (root) {
       this.renderer.setStyle(
         root,
-        'transition',
+        "transition",
         this.isFlashing ? flashStyle : fadeStyle
       );
     }
   }
 
-  @HostListener('click', ['$event'])
+  @HostListener("click", ["$event"])
   onClick(event: MouseEvent) {
     const width = window.innerWidth;
     const x = event.clientX;
@@ -135,6 +136,6 @@ export class PlayerComponent {
 
   backToConfig() {
     this.stopFlashing();
-    this.router.navigate(['/set/' + encodeURIComponent(this.setName)]);
+    this.router.navigate(["/set/" + encodeURIComponent(this.setName)]);
   }
 }

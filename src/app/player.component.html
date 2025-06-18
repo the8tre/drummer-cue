@@ -2,7 +2,7 @@
   <div class="song-info">
     <h1>{{ set.songs[currentIndex].name }}</h1>
     <h2 *ngIf="set.songs[currentIndex]?.bpm">
-      ({{ set.songs[currentIndex].bpm }} BPM)
+      ({{ set.songs[currentIndex].bpm }} {{ "BPM_CAPITAL" | translate }})
     </h2>
   </div>
 </div>

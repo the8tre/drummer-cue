@@ -30,7 +30,10 @@
       <a (click)="openSet(set.name)" class="name"
         >{{ i + 1 }}. {{ set.name }}</a
       >
-      <button (click)="renameSet(set.name)">
+      <button
+        (click)="renameSet(set.name)"
+        title="{{ 'RENAME_SET' | translate }}"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -43,7 +46,10 @@
           />
         </svg>
       </button>
-      <button (click)="removeSet(set.name)">
+      <button
+        (click)="removeSet(set.name)"
+        title="{{ 'DELETE_SET' | translate }}"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -60,6 +66,8 @@
   </div>
 
   <div class="controls">
-    <button (click)="addSet()">Add Set</button>
+    <button (click)="addSet()">
+      {{ "NEW_SET" | translate }}
+    </button>
   </div>
 </div>

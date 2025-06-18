@@ -1,7 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 
 export interface Song {
   name: string;
@@ -15,31 +16,31 @@ export interface Setlist {
 }
 
 @Component({
-  selector: 'app-config',
+  selector: "app-config",
   standalone: true,
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  imports: [CommonModule, FormsModule],
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"],
+  imports: [CommonModule, FormsModule, TranslateModule],
 })
 export class HomeComponent {
   sets: Setlist[] = [
     {
-      name: 'Default Set',
+      name: "Default Set",
       songs: [
         {
-          name: 'My Immortal',
+          name: "My Immortal",
           bpm: 158,
         },
         {
-          name: 'Black Velvet',
+          name: "Black Velvet",
           bpm: 91,
         },
         {
-          name: 'Locked Out Of Heaven',
+          name: "Locked Out Of Heaven",
           bpm: 144,
         },
         {
-          name: 'Back To Black',
+          name: "Back To Black",
           bpm: 123,
         },
         {
@@ -58,19 +59,19 @@ export class HomeComponent {
     },
   ];
 
-  constructor(private router: Router) {
-    const stored = localStorage.getItem('drummer-cue-sets');
+  constructor(private router: Router, private translate: TranslateService) {
+    const stored = localStorage.getItem("drummer-cue-sets");
     if (stored) {
       this.sets = JSON.parse(stored);
     }
   }
 
   addSet() {
-    const name = prompt('Enter the set name:');
+    const name = prompt(this.translate.instant("ENTER_SET_NAME"));
     if (name) {
       this.sets.push({
         name: name,
-        songs: [{ name: '', bpm: 120, duration: undefined }],
+        songs: [{ name: "", bpm: 120, duration: undefined }],
       });
       this.sets.sort((a, b) => a.name.localeCompare(b.name));
       this.save();
@@ -79,7 +80,7 @@ export class HomeComponent {
   }
 
   renameSet(oldName: string) {
-    const newName = prompt('Enter the new set name:', oldName);
+    const newName = prompt(this.translate.instant("ENTER_SET_NAME"), oldName);
     if (newName && newName !== oldName) {
       const index = this.sets.findIndex((set) => set.name === oldName);
       if (index !== -1) {
@@ -91,7 +92,11 @@ export class HomeComponent {
   }
 
   removeSet(setName: string) {
-    if (window.confirm(`Do you really want to delete "${setName}"?`)) {
+    if (
+      window.confirm(
+        this.translate.instant("CONFIRM_DELETE_SET", { name: setName })
+      )
+    ) {
       const index = this.sets.findIndex((set) => set.name === setName);
       if (index === -1) return;
       this.sets.splice(index, 1);
@@ -100,7 +105,7 @@ export class HomeComponent {
   }
 
   save() {
-    localStorage.setItem('drummer-cue-sets', JSON.stringify(this.sets));
+    localStorage.setItem("drummer-cue-sets", JSON.stringify(this.sets));
   }
 
   openSet(setName: string) {

@@ -33,7 +33,7 @@
         <button (click)="moveUp(i)" class="reorder">↑</button>
         <input
           type="text"
-          placeholder="Song name"
+          placeholder="{{ 'SONG_NAME' | translate }}"
           [(ngModel)]="song.name"
           name="songName{{ i }}"
           class="name"
@@ -56,14 +56,14 @@
         <button (click)="moveDown(i)" class="reorder">↓</button>
         <input
           type="number"
-          placeholder="BPM"
+          placeholder="{{ 'BPM_CAPITAL' | translate }}"
           [(ngModel)]="song.bpm"
           name="songBpm{{ i }}"
           class="bpm"
-        />bpm
+        />{{ "BPM" | translate }}
         <input
           type="number"
-          placeholder="Duration (s)"
+          placeholder="{{ 'DURATION' | translate }}"
           [(ngModel)]="song.duration"
           name="songDuration{{ i }}"
           min="0"
@@ -74,7 +74,7 @@
   </div>
 
   <div class="controls">
-    <button (click)="addSong()">Add Song</button>
+    <button (click)="addSong()">{{ "ADD_SONG" | translate }}</button>
     <button (click)="startPlayer()">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -86,8 +86,7 @@
       >
         <path d="M8 5v14l11-7z" />
       </svg>
-
-      Start
+      {{ "START_PLAYER" | translate }}
     </button>
   </div>
 </div>
